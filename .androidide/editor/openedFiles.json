@@ -1,11 +1,11 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/src/main/resources/fml.mod.json",
+      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/src/main/resources/assets/sieve/lang/zh_CN.lang",
       "selection": {
         "end": {
-          "column": 0,
-          "index": 0,
+          "column": 18,
+          "index": 18,
           "line": 0
         },
         "start": {
@@ -16,20 +16,20 @@
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/.gitignore",
+      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/src/main/resources/assets/sieve/lang/en_US.lang",
       "selection": {
         "end": {
-          "column": 18,
-          "index": 265,
-          "line": 41
+          "column": 21,
+          "index": 21,
+          "line": 0
         },
         "start": {
-          "column": 18,
-          "index": 265,
-          "line": 41
+          "column": 21,
+          "index": 21,
+          "line": 0
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Sieve/.gitignore"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Sieve/src/main/resources/assets/sieve/lang/en_US.lang"
 }

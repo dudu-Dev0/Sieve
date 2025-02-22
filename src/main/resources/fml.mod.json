@@ -18,7 +18,7 @@
 	"accessWidener": "sieve.accesswidener",
     "icon": "pack.png",
     "contact": {
-    "homepage": "https://github.com/dudu-Dev0/Sieve",
-    "issues": "https://github.com/dudu-Dev0/Sieve/issues"
-  },
+        "homepage": "https://github.com/dudu-Dev0/Sieve",
+        "issues": "https://github.com/dudu-Dev0/Sieve/issues"
+    }
 }
