@@ -1,7 +1,10 @@
 package com.dudu.sieve.blocks;
 
+import com.dudu.sieve.items.Items;
 import net.minecraft.Block;
 import net.minecraft.BlockConstants;
+import net.minecraft.Item;
+import net.minecraft.ItemStack;
 import net.minecraft.Material;
 import net.xiaoyu233.fml.FishModLoader;
 import net.xiaoyu233.fml.reload.event.ItemRegistryEvent;
@@ -22,7 +25,7 @@ public class Blocks extends Block {
 
     //在这里注册影子物品合成配方
     public static void registerRecipes(RecipeRegistryEvent register) {
-
+        register.registerShapedRecipe(new ItemStack(sieveBlock),false,"ABA","C C",'A',Block.planks,'B',Items.mesh,'C',Item.stick);
     }
     public static int getNextBlockId() {
     	return IdUtil.getNextBlockID();
