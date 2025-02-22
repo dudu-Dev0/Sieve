@@ -1,0 +1,35 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/src/main/resources/fml.mod.json",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Sieve/.gitignore",
+      "selection": {
+        "end": {
+          "column": 18,
+          "index": 265,
+          "line": 41
+        },
+        "start": {
+          "column": 18,
+          "index": 265,
+          "line": 41
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Sieve/.gitignore"
+}

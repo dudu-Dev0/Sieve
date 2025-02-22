@@ -1,0 +1,24 @@
+{
+	"schemaVersion": 1,
+	"id": "sieve",
+	"version": "${version}",
+	"depends": {
+		"fishmodloader": ">=3.2.1"
+	},
+	"environment": "*",
+	"name": "筛子",
+	"description": "从无中生有中剥离出来的筛子，为MITE玩家提供了更加方便的挖沙体验",
+	"authors": ["dudu","Erasmus Crowley"],
+	"entrypoints": {
+		"main": ["com.dudu.sieve.SieveInitializer"]
+	},
+	"mixins": [
+		"sieve.mixins.json"
+	],
+	"accessWidener": "sieve.accesswidener",
+    "icon": "pack.png",
+    "contact": {
+    "homepage": "https://github.com/dudu-Dev0/Sieve",
+    "issues": "https://github.com/dudu-Dev0/Sieve/issues"
+  },
+}
