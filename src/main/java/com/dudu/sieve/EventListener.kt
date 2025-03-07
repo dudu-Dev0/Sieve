@@ -1,77 +1,72 @@
-package com.dudu.sieve;
+package com.dudu.sieve
 
-import com.dudu.sieve.blocks.Blocks;
-import com.dudu.sieve.blocks.models.ModelSieve;
-import com.dudu.sieve.blocks.models.ModelSieveMesh;
-import com.dudu.sieve.items.Items;
-import com.dudu.sieve.render.RenderSieve;
-import com.dudu.sieve.tileentities.TileEntitySieve;
-import com.google.common.eventbus.Subscribe;
-import net.minecraft.NetHandler;
-import net.minecraft.NetworkListenThread;
-import net.minecraft.TileEntity;
-import net.xiaoyu233.fml.reload.event.*;
-import net.xiaoyu233.fml.reload.utils.IdUtil;
+import com.dudu.sieve.blocks.Blocks
+import com.dudu.sieve.blocks.models.ModelSieve
+import com.dudu.sieve.blocks.models.ModelSieveMesh
+import com.dudu.sieve.items.Items
+import com.dudu.sieve.render.RenderSieve
+import com.dudu.sieve.tileentities.TileEntitySieve
+import com.google.common.eventbus.Subscribe
+import net.xiaoyu233.fml.reload.event.*
+import net.xiaoyu233.fml.reload.utils.IdUtil
 
-import java.util.Objects;
-
-public class EventListener {
+class EventListener {
     //物品注册
     @Subscribe
-    public void onItemRegister(ItemRegistryEvent event) {
-        Items.registerItems(event);
-        Blocks.registerItemBlocks(event);
+    fun onItemRegister(event: ItemRegistryEvent) {
+        Items.registerItems(event)
+        Blocks.registerItemBlocks(event)
     }
 
     //合成方式注册
     @Subscribe
-    public void onRecipeRegister(RecipeRegistryEvent event) {
-        Items.registerRecipes(event);
-        Blocks.registerRecipes(event);
+    fun onRecipeRegister(event: RecipeRegistryEvent) {
+        Items.registerRecipes(event)
+        Blocks.registerRecipes(event)
     }
 
     //玩家登录事件
     @Subscribe
-    public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+    fun onPlayerLoggedIn(event: PlayerLoggedInEvent?) {
     }
 
     //指令事件
     @Subscribe
-    public void handleChatCommand(HandleChatCommandEvent event) {
+    fun handleChatCommand(event: HandleChatCommandEvent?) {
     }
 
     //实体注册
     @Subscribe
-    public void onEntityRegister(EntityRegisterEvent event) {
+    fun onEntityRegister(event: EntityRegisterEvent?) {
     }
 
     //实体渲染注册
     @Subscribe
-    public void onEntityRendererRegistry(EntityRendererRegistryEvent event) {
+    fun onEntityRendererRegistry(event: EntityRendererRegistryEvent?) {
     }
 
     //方块实体注册
     @Subscribe
-    public void onTileEntityRegister(TileEntityRegisterEvent event) {
-        event.register(TileEntitySieve.class,"sieve:sieve_tileentity");
+    fun onTileEntityRegister(event: TileEntityRegisterEvent) {
+        event.register(TileEntitySieve::class.java, "sieve:sieve_tileentity")
     }
 
     //方块实体渲染注册
     @Subscribe
-    public void onTileEntityRendererRegister(TileEntityRendererRegisterEvent event) {
+    fun onTileEntityRendererRegister(event: TileEntityRendererRegisterEvent) {
         //event.register(TileEntitySieve.class,"sieve:sieve_tileentity")
-        event.register(TileEntitySieve.class,new RenderSieve(new ModelSieve(),new ModelSieveMesh()));
+        event.register(TileEntitySieve::class.java, RenderSieve(ModelSieve(), ModelSieveMesh()))
     }
 
     //声音注册
     @Subscribe
-    public void onSoundsRegister(SoundsRegisterEvent event) {
+    fun onSoundsRegister(event: SoundsRegisterEvent?) {
     }
 
-    public static int getNextEntityID() {
-        return IdUtil.getNextEntityID();
-    }
-    public static int getNextItemID() {
-    	return IdUtil.getNextItemID();
+    companion object {
+        val nextEntityID: Int
+            get() = IdUtil.getNextEntityID()
+        val nextItemID: Int
+            get() = IdUtil.getNextItemID()
     }
 }

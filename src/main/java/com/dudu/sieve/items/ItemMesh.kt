@@ -1,32 +1,24 @@
-package com.dudu.sieve.items;
+package com.dudu.sieve.items
 
-import net.minecraft.CreativeTabs;
-import net.minecraft.IconRegister;
-import net.minecraft.Item;
-import net.minecraft.ItemStack;
+import net.minecraft.CreativeTabs
+import net.minecraft.IconRegister
+import net.minecraft.Item
+import net.minecraft.ItemStack
 
-public class ItemMesh extends Item {
+class ItemMesh(id: Int) : Item(id, "sieve:mesh") {
+    init {
+        creativeTab = CreativeTabs.tabMisc
+    }
 
-	public ItemMesh(int id) {
-		super(id,"sieve:mesh");
-		setCreativeTab(CreativeTabs.tabMisc);
-	}
-	
-	@Override
-	public String getUnlocalizedName()
-	{
-		return "mesh";
-	}
-	
-	@Override
-	public String getUnlocalizedName(ItemStack item)
-	{
-		return "mesh";
-	}
-	
-	@Override
-	public void registerIcons(IconRegister register)
-	{
-		this.itemIcon = register.registerIcon("sieve:mesh");
-	}
+    override fun getUnlocalizedName(): String {
+        return "mesh"
+    }
+
+    override fun getUnlocalizedName(item: ItemStack?): String {
+        return "mesh"
+    }
+
+    override fun registerIcons(register: IconRegister) {
+        this.itemIcon = register.registerIcon("sieve:mesh")
+    }
 }

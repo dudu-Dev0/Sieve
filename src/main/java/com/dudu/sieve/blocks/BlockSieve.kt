@@ -1,45 +1,24 @@
-package com.dudu.sieve.blocks;
+package com.dudu.sieve.blocks
 
-import com.dudu.sieve.render.ItemRenderSieve;
-import java.util.List;
+import com.dudu.sieve.SieveRegistry
+import com.dudu.sieve.tileentities.TileEntitySieve
+import com.dudu.sieve.tileentities.TileEntitySieve.SieveMode
+import net.minecraft.*
+import net.xiaoyu233.fml.util.Log
 
-import net.minecraft.BlockConstants;
-import net.minecraft.BlockContainer;
-import net.minecraft.BlockGravel;
-import net.minecraft.BlockWood;
-import net.minecraft.CreativeTabs;
-import net.minecraft.EntityClientPlayerMP;
-import net.minecraft.EnumFace;
-import net.minecraft.Icon;
-import net.minecraft.IconRegister;
-import net.minecraft.Material;
-import net.minecraft.Block;
-import net.minecraft.BlockContainer;
-import net.minecraft.EntityPlayer;
-import net.minecraft.Item;
-import net.minecraft.ItemStack;
-import net.minecraft.TileEntity;
-import net.minecraft.World;
-import com.dudu.sieve.tileentities.TileEntitySieve;
-import com.dudu.sieve.tileentities.TileEntitySieve.SieveMode;
-import com.dudu.sieve.SieveRegistry;
-import net.xiaoyu233.fml.util.Log;
-
-public class BlockSieve extends BlockContainer {
-    public static Icon meshIcon;
-
-	public BlockSieve(int id,Material material,BlockConstants constants) {
-        super(id,material,constants);
-		setCreativeTab(CreativeTabs.tabDecorations);
-		setHardness(2.0f);
-        setUnlocalizedName("sieve");
-        setTextureName("sieve:sieve");
-	}
-    @Override
-    public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon("sieve" + ":" + "item_sieve");
-		meshIcon = register.registerIcon("sieve" + ":" + "sieveMesh");
+class BlockSieve(id: Int, material: Material?, constants: BlockConstants) : BlockContainer(id, material, constants) {
+    init {
+        setCreativeTab(CreativeTabs.tabDecorations)
+        setHardness(2.0f)
+        unlocalizedName = "sieve"
+        setTextureName("sieve:sieve")
     }
+
+    override fun registerIcons(register: IconRegister) {
+        blockIcon = register.registerIcon("sieve" + ":" + "item_sieve")
+        meshIcon = register.registerIcon("sieve" + ":" + "sieveMesh")
+    }
+
     /*
 	@Override
 	public void registerBlockIcons(IconRegister register)
@@ -47,25 +26,17 @@ public class BlockSieve extends BlockContainer {
 		blockIcon = BlockWood.planks.getIcon(0,0);
 		meshIcon = register.registerIcon("sieve" + ":" + "sieveMesh");
 	}*/
-	@Override
-	public void getItemStacks(int item, CreativeTabs tabs, List subItems) {
-		for (int i = 0; i < 6; i++) {
-			subItems.add(new ItemStack(item, 1, i));
-		}
-        //super.getItemStacks(item,tabs,subItems);
-	}
-    
-    
-	@Override
-	public int getRenderType()
-	{
-		return -1;
-	}
-    
-    @Override
-    public boolean isStandardFormCube(boolean[] is_standard_form_cube, int metadata) {
-        return false;
+
+
+
+    override fun getRenderType(): Int {
+        return -1
     }
+
+    override fun isStandardFormCube(is_standard_form_cube: BooleanArray, metadata: Int): Boolean {
+        return false
+    }
+
     /*
 	@Override
 	public boolean isOpaqueCube()
@@ -73,86 +44,85 @@ public class BlockSieve extends BlockContainer {
 		return false;
 	}
 */
-	/*
+    /*
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 */
-	@Override
-	public boolean hasTileEntity()
-	{
-		return true;
-	}
-/*
+    override fun hasTileEntity(): Boolean {
+        return true
+    }
+
+    /*
 	@Override
 	public int damageDropped (int metadata) {
 		return metadata;
 	}
 */
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySieve();
-	}
-    
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, EnumFace side, float hitX, float hitY, float hitZ)
-	{
-        Log.warn("right click sieve");
-		if (player == null)
-		{
-			return false;
-		}
+    override fun createNewTileEntity(world: World): TileEntity {
+        return TileEntitySieve()
+    }
 
-		TileEntitySieve sieve = (TileEntitySieve) world.getBlockTileEntity(x, y, z);
+    override fun onBlockActivated(
+        world: World,
+        x: Int,
+        y: Int,
+        z: Int,
+        player: EntityPlayer?,
+        side: EnumFace,
+        hitX: Float,
+        hitY: Float,
+        hitZ: Float
+    ): Boolean {
+        Log.warn("right click sieve")
+        if (player == null) {
+            return false
+        }
 
-		if (sieve.mode == SieveMode.EMPTY && player.inventory.getCurrentItemStack() != null)
-		{
-			ItemStack held = player.inventory.getCurrentItemStack();
-			Log.warn("try to add Sievable itemId "+held.getItem().itemID + "gravelId" +BlockGravel.gravel.blockID);
-			if (SieveRegistry.Contains(held.getItem().itemID))
-			{
-                Log.warn("successfully add sievable");
-				sieve.addSievable(held.getItem().itemID, held.getItemDamage());
-				removeCurrentItem(player);
-			}
-		}else
-		{
-			if (world.isRemote)
-			{
-                Log.warn("remote world!");
-				sieve.ProcessContents(false);
-			}else
-			{
-				if (sieve.mode != SieveMode.EMPTY)
-				{
-						sieve.ProcessContents(false);
-				}
-			}
-		}
+        val sieve = world.getBlockTileEntity(x, y, z) as TileEntitySieve
 
-		return true;
-	}
+        if (sieve.mode == SieveMode.EMPTY && player.inventory.currentItemStack != null) {
+            val held = player.inventory.currentItemStack
+            Log.warn("try to add Sievable itemId " + held.item.itemID + "gravelId" + gravel.blockID)
+            if (SieveRegistry.Contains(held.item.itemID)) {
+                Log.warn("successfully add sievable")
+                sieve.addSievable(held.item.itemID, held.itemDamage)
+                removeCurrentItem(player)
+            }
+        } else {
+            if (world.isRemote) {
+                Log.warn("remote world!")
+                sieve.ProcessContents(false)
+            } else {
+                if (sieve.mode != SieveMode.EMPTY) {
+                    sieve.ProcessContents(false)
+                }
+            }
+        }
 
-	private boolean isHuman(EntityPlayer player)
-	{
-		boolean isHuman = (player instanceof EntityClientPlayerMP);
+        return true
+    }
 
-		return isHuman;
-	}
+    private fun isHuman(player: EntityPlayer): Boolean {
+        val isHuman = (player is EntityClientPlayerMP)
 
-	private void removeCurrentItem(EntityPlayer player)
-	{
-		ItemStack item = player.inventory.getCurrentItemStack();
+        return isHuman
+    }
 
-		if (!player.capabilities.isCreativeMode)
-		{
-			item.stackSize -= 1;
-			if (item.stackSize == 0)
-			{
-				item = null;
-			}
-		}
+    private fun removeCurrentItem(player: EntityPlayer) {
+        var item = player.inventory.currentItemStack
 
-	}
+        if (!player.capabilities.isCreativeMode) {
+            item!!.stackSize -= 1
+            if (item!!.stackSize == 0) {
+                item = null
+            }
+        }
+    }
+
+    companion object {
+        @JvmField
+        var meshIcon: Icon? = null
+    }
 }

@@ -23,7 +23,7 @@ public abstract class MixinItemRender {
     // 注入到 ItemRenderer 的 renderItem 方法
     @Inject(method = "renderItem", at = @At(value = "HEAD", target = "Lnet/minecraft/RenderBlocks;renderBlockAsItem(Lnet/minecraft/Block;IF)V"))
     public void renderItem(EntityLivingBase base,ItemStack stack, int partialTicks, CallbackInfo ci) {
-        if (stack.getItem().itemID == Blocks.sieveId) {
+        if (stack.getItem().itemID == Blocks.INSTANCE.getSieveId()) {
             // 这里调用你的渲染器
             new ItemRenderSieve(Minecraft.getMinecraft()).renderItem(base,stack, (int)partialTicks);
         }

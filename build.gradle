@@ -1,6 +1,7 @@
 plugins {
-    id 'fml-loom' version '0.1.local'
+    id 'fml-loom' version '1.4.5'
     id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 version = project.mod_version
@@ -16,12 +17,13 @@ repositories {
         name = "Spongepowered"
         url = "https://repo.spongepowered.org/repository/maven-public/"
     }
+    mavenCentral()
 }
 
 loom {
     accessWidenerPath = file("src/main/resources/sieve.accesswidener")
     mergedMinecraftJar()
-    setFML(new File("/storage/emulated/0/AndroidIDEProjects/CursedRing/lib/FishModLoader.jar"))
+    setFML(new File("C:\\Users\\1\\Downloads\\FishModLoader.jar"))
     mods {
         "Sieve" {
             sourceSet sourceSets.main
@@ -40,6 +42,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     implementation files(loom.getFML().toPath())
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 processResources {
@@ -57,8 +60,6 @@ tasks.withType(JavaCompile).configureEach {
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
@@ -79,4 +80,7 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+}
+kotlin {
+    jvmToolchain(17)
 }

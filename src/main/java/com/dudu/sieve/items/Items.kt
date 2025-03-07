@@ -1,24 +1,23 @@
-package com.dudu.sieve.items;
+package com.dudu.sieve.items
 
-import net.minecraft.Item;
-import net.minecraft.ItemStack;
-import net.xiaoyu233.fml.reload.event.ItemRegistryEvent;
-import net.xiaoyu233.fml.reload.event.RecipeRegistryEvent;
-import net.xiaoyu233.fml.reload.utils.IdUtil;
+import net.minecraft.Item
+import net.minecraft.ItemStack
+import net.xiaoyu233.fml.reload.event.ItemRegistryEvent
+import net.xiaoyu233.fml.reload.event.RecipeRegistryEvent
+import net.xiaoyu233.fml.reload.utils.IdUtil
 
-public class Items extends Item {
-    public static final int meshId = getNextItemId();
-    public static final Item mesh = new ItemMesh(meshId);
-    public static void registerItems(ItemRegistryEvent event) {
-        event.register("sieve","sieve:mesh","mesh",mesh);
+object Items : Item() {
+    val meshId: Int = nextItemId
+    val mesh: Item = ItemMesh(meshId)
+    fun registerItems(event: ItemRegistryEvent) {
+        event.register("sieve", "sieve:mesh", "mesh", mesh)
     }
 
-    public static void registerRecipes(RecipeRegistryEvent register) {
-        register.registerShapedRecipe(new ItemStack(mesh),false,"AA","AA",'A',new ItemStack(Item.sinew));
-        register.registerShapedRecipe(new ItemStack(mesh),false,"AA","AA",'A',new ItemStack(Item.silk));
+    fun registerRecipes(register: RecipeRegistryEvent) {
+        register.registerShapedRecipe(ItemStack(mesh), false, "AA", "AA", 'A', ItemStack(sinew))
+        register.registerShapedRecipe(ItemStack(mesh), false, "AA", "AA", 'A', ItemStack(silk))
     }
 
-    public static int getNextItemId() {
-    	return IdUtil.getNextItemID();
-    }
+    val nextItemId: Int
+        get() = IdUtil.getNextItemID()
 }
